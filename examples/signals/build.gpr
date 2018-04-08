@@ -1,0 +1,8 @@
+with "../../src/ada_object_framework.gpr";
+
+project Build is
+    for Source_Dirs use (".");
+    for Object_Dir use "obj";
+    for Exec_Dir use ".";
+    for Main use ("signal_test.adb");
+end Build;

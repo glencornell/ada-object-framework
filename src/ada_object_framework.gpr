@@ -1,0 +1,10 @@
+Library project ada_object_framework is
+  Lib_Name := "aof";
+  Version := "1.0.0";
+  for Library_Name use Lib_Name;
+  for Source_Dirs use (".");
+  for Object_Dir use "obj";
+  for Library_Dir use "lib";
+  for Library_Kind use "dynamic";
+  for Library_Version use "lib" & Lib_Name & ".so." & Version;
+end Ada_Object_Framework;
