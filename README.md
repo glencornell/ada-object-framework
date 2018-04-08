@@ -1,4 +1,4 @@
-# Project Name
+# Ada Object Framework
 
 This project is intended to provide an object framework, much like Qt
 for c++.  This is not a Qt binding for Ada.  Rather, it is a way to
