@@ -6,26 +6,19 @@ extend the Ada language in the following ways:
 
 * Signals and Slots
 * Properties
+* Object heirarchies
 
 ## Description
 
 TODO: describe the goals of the project, use-cases, and software architecture.
 
-## Installation
-
-TODO: Describe the installation process
-
 ## Contributing
 
-1. Fork it!
+1. Fork it: `git clone https://github.com/glencornell/ada-object-framework`
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
-
-## History
-
-TODO: Write history
 
 ## Credits
 
