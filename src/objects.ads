@@ -40,6 +40,11 @@ package Objects is
      (This : in Object'Class;
       Name : in String;
       Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List;
+   generic
+      with procedure Proc(This : in out Object_Ptr);
+   procedure Iterate
+     (This : in out Object_Ptr;
+      Options : in Find_Child_Options := Find_Children_Recursively);
    
 private
    

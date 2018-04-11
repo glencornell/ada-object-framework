@@ -1,6 +1,5 @@
 package body Objects is
    
-   use type Ada.Strings.Unbounded.Unbounded_String;
    use type Object_List.Cursor;
    
    function Object_Name (This : in Object'Class) return String is
@@ -51,30 +50,14 @@ package body Objects is
      (This : in Object'Class;
       Name : in String;
       Options : in Find_Child_Options := Find_Children_Recursively) return Object_Ptr is 
-      
-      function Equals(X : in Object_Ptr) return Boolean is
-      begin
-	 if X = null then
-	    return False;
-	 end if;
-	 return This.Object_Name.Get = X.Object_Name.Get;
-      end;
-      
-      I : Object_List.Cursor := This.Children.First;
-      Obj : Object_Ptr := null;
    begin
-      while I /= This.Children.Last loop
-	 Obj := Object_List.Element(I);
-	 if Equals(Obj) then
+      for Obj of This.Children loop
+	 if Name = Ada.Strings.Unbounded.To_String(Obj.Object_Name.Get) then
 	    return Obj;
 	 end if;
 	 if Options = Find_Children_Recursively then
-	    Obj := Obj.Find_Child(Name, Options);
-	    if Equals(Obj) then
-	       return Obj;
-	    end if;
+	    return Obj.Find_Child(Name, Options);
 	 end if;
-	 I := Object_List.Next(I);
       end loop;
       return null;
    end;
@@ -83,22 +66,10 @@ package body Objects is
      (This : in Object'Class;
       Name : in String;
       Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List is 
-      
-      function Equals(X : in Object_Ptr) return Boolean is
-      begin
-	 if X = null then
-	    return False;
-	 end if;
-	 return This.Object_Name.Get = X.Object_Name.Get;
-      end;
-      
-      I : Object_List.Cursor := This.Children.First;
-      Obj : Object_Ptr := null;
       Obj_List : Object_List.List;
    begin
-      while I /= This.Children.Last loop
-	 Obj := Object_List.Element(I);
-	 if Equals(Obj) then
+      for Obj of This.Children loop
+	 if Name = Ada.Strings.Unbounded.To_String(Obj.Object_Name.Get) then
 	    Obj_List.Append(Obj);
 	 end if;
 	 if Options = Find_Children_Recursively then
@@ -109,9 +80,20 @@ package body Objects is
 			       Source => Children);
 	    end;
 	 end if;
-	 I := Object_List.Next(I);
       end loop;
       return Obj_List;
+   end;
+   
+   procedure Iterate
+     (This : in out Object_Ptr;
+      Options : in Find_Child_Options := Find_Children_Recursively) is
+   begin
+      for Child of This.Children loop
+	 if Options = Find_Children_Recursively then
+	    Iterate(This => Child, Options => Options);
+	 end if;
+	 Proc(Child);
+      end loop;
    end;
    
    function Contains
@@ -137,7 +119,7 @@ package body Objects is
       I : Object_List.Cursor := This.Children.First;
       Obj : Object_Ptr := null;
    begin
-      while I /= This.Children.Last loop
+      loop
 	 Obj := Object_List.Element(I);
 	 if Obj = Child then
 	    Obj.Parent := null;
@@ -147,6 +129,7 @@ package body Objects is
 	 if Options = Find_Children_Recursively then
 	    Obj.Delete_Child(Child, Options);
 	 end if;
+	 exit when I = This.Children.Last;
 	 I := Object_List.Next(I);
       end loop;
    end;
