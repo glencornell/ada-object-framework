@@ -1,4 +1,4 @@
-with Properties;
+with Aof.Core.Generic_Properties;
 with Callbacks;
 
 --  In this example, we are going to create a simple integer property.
@@ -13,7 +13,7 @@ procedure Property_Test is
    
    --  Create a property of integers in the following generic package
    --  instantiation:
-   package Prop is new Properties(T => Integer);
+   package Prop is new Aof.Core.Generic_Properties(T => Integer);
    
    --  Now create a property object:
    My_Integer_Property : Prop.Property;

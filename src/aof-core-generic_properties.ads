@@ -1,10 +1,10 @@
-with Signals;
+with Aof.Core.Signals;
 
 generic
    type T is private;
-package Properties is
+package Aof.Core.Generic_Properties is
    
-   package Signals_Pkg is new Signals.S1 (Param_1 => T);
+   package Signals_Pkg is new Aof.Core.Signals.S1 (Param_1 => T);
    
    type Property is tagged limited private;
    
@@ -22,4 +22,4 @@ private
       On_Change_Signal : Signals_Pkg.Signal;
    end record;
    
-end Properties;
+end Aof.Core.Generic_Properties;

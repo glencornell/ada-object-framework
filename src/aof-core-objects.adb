@@ -1,20 +1,23 @@
-package body Objects is
+with Ada.Strings.Unbounded;
+
+package body Aof.Core.Objects is
    
    use type Object_List.Cursor;
+   use type Ada.Strings.Unbounded.Unbounded_String;
    
-   function Object_Name (This : in Object'Class) return String is
+   function Get_Name (This : in Object'Class) return String is
    begin
-      return Ada.Strings.Unbounded.To_String(This.Object_Name.Get);
+      return Ada.Strings.Unbounded.To_String(This.Name.Get);
    end;
    
-   procedure Set_Object_Name 
+   procedure Set_Name 
      (This : in out Object'Class;
       Name : in String) is
    begin
-      This.Object_Name.Set(Ada.Strings.Unbounded.To_Unbounded_String(Name));
+      This.Name.Set(Ada.Strings.Unbounded.To_Unbounded_String(Name));
    end;
    
-   function Parent (This : in Object'Class) return Object_Ptr is
+   function Get_Parent (This : in Object'Class) return Object_Ptr is
    begin
       return This.Parent;
    end;
@@ -41,18 +44,18 @@ package body Objects is
       This.Parent := Parent;
    end;
    
-   function Children (This : in Object'Class) return Object_List.List is
+   function Get_Children (This : in Object'Class) return Object_List.List is
    begin
       return This.Children;
    end;
    
    function Find_Child 
      (This : in Object'Class;
-      Name : in String;
+      Name : in Ada.Strings.Unbounded.Unbounded_String;
       Options : in Find_Child_Options := Find_Children_Recursively) return Object_Ptr is 
    begin
       for Obj of This.Children loop
-	 if Name = Ada.Strings.Unbounded.To_String(Obj.Object_Name.Get) then
+	 if Name = Obj.Name.Get then
 	    return Obj;
 	 end if;
 	 if Options = Find_Children_Recursively then
@@ -62,14 +65,24 @@ package body Objects is
       return null;
    end;
    
-   function Find_Children
+   function Find_Child 
      (This : in Object'Class;
       Name : in String;
+      Options : in Find_Child_Options := Find_Children_Recursively) return Object_Ptr is 
+      The_Name : constant Ada.Strings.Unbounded.Unbounded_String := 
+	Ada.Strings.Unbounded.To_Unbounded_String(Name);
+   begin
+      return This.Find_Child(The_Name, Options);
+   end;
+   
+   function Find_Children
+     (This : in Object'Class;
+      Name : in Ada.Strings.Unbounded.Unbounded_String;
       Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List is 
       Obj_List : Object_List.List;
    begin
       for Obj of This.Children loop
-	 if Name = Ada.Strings.Unbounded.To_String(Obj.Object_Name.Get) then
+	 if Name = Obj.Name.Get then
 	    Obj_List.Append(Obj);
 	 end if;
 	 if Options = Find_Children_Recursively then
@@ -82,6 +95,16 @@ package body Objects is
 	 end if;
       end loop;
       return Obj_List;
+   end;
+   
+   function Find_Children
+     (This : in Object'Class;
+      Name : in String;
+      Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List is 
+      The_Name : constant Ada.Strings.Unbounded.Unbounded_String := 
+	Ada.Strings.Unbounded.To_Unbounded_String(Name);
+   begin
+      return This.Find_Children(The_Name, Options);
    end;
    
    procedure Iterate
@@ -134,4 +157,15 @@ package body Objects is
       end loop;
    end;
    
-end Objects;
+   procedure Finalize (This : in out Public_Part) is
+   begin
+      This.Destroyed.Emit(This'Unchecked_Access);
+   end Finalize;
+   
+   procedure Finalize (This : in out Object) is
+   begin
+      -- TODO: delete all children?
+      null;
+   end Finalize;
+   
+end Aof.Core.Objects;

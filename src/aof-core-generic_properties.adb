@@ -1,4 +1,4 @@
-package body Properties is
+package body Aof.Core.Generic_Properties is
    
    function Get (This : in Property'Class) return T is
    begin
@@ -23,4 +23,4 @@ package body Properties is
       This.On_Change_Signal.Emit(This.Value);
    end;
    
-end Properties;
+end Aof.Core.Generic_Properties;

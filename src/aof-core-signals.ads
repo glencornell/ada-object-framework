@@ -1,6 +1,6 @@
 private with Ada.Containers.Vectors;
 
-package Signals is
+package Aof.Core.Signals is
    
    package S0 is
       
@@ -145,4 +145,4 @@ package Signals is
    
    end S3;
 
-end Signals;
+end Aof.Core.Signals;

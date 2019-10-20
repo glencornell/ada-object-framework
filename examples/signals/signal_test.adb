@@ -1,4 +1,4 @@
-with Signals;
+with Aof.Core.Signals;
 with Slots;
 
 --  In this example, we will create two signals, one with no arguments
@@ -10,11 +10,11 @@ with Slots;
 procedure Signal_Test is
    
    --  Create a signal class containing one argument of type integer
-   package S1_Pkg is new Signals.S1(Param_1 => Integer);
+   package S1_Pkg is new Aof.Core.Signals.S1(Param_1 => Integer);
    
    --  A signal with no parameters is not a generic package and,
    --  therefore, needs no generic instantiation.
-   S0 : Signals.S0.Signal;
+   S0 : Aof.Core.Signals.S0.Signal;
    S1 : S1_Pkg.Signal;
    
 begin

@@ -1,18 +1,15 @@
-with Objects;
-with Properties;
+with Aof.Core.Objects;
+with Aof.Core.Properties;
 
 package Widgets is
    
-   package Natural_Properties is new Properties 
-     (T => Natural);
-
-   type Widget is new Objects.Object with 
+   type Widget is new Aof.Core.Objects.Object with 
       record
 	 --  Properties:
-	 X : Natural_Properties.Property;
-	 Y : Natural_Properties.Property;
-	 Width : Natural_Properties.Property;
-	 Height : Natural_Properties.Property;
+	 X      : Aof.Core.Properties.Naturals.Property;
+	 Y      : Aof.Core.Properties.Naturals.Property;
+	 Width  : Aof.Core.Properties.Naturals.Property;
+	 Height : Aof.Core.Properties.Naturals.Property;
       end record;
    type Widget_Ptr is access all Widget'Class;
    

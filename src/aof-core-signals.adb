@@ -1,4 +1,4 @@
-package body Signals is
+package body Aof.Core.Signals is
    
    package body S0 is
       
@@ -126,4 +126,4 @@ package body Signals is
       
    end S3;
    
-end Signals;
+end Aof.Core.Signals;

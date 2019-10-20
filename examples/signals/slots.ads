@@ -1,5 +1,3 @@
-with Signals;
-
 package Slots is
    procedure Xaa;
    procedure Xab;
