@@ -1,8 +1,8 @@
 # Ada Object Framework
 
-This project is intended to provide an object framework, much like Qt
-for c++.  This is not a Qt binding for Ada.  Rather, it is a way to
-extend the Ada language in the following ways:
+This project is intended to provide an object framework, much like the
+QtCore library for C++.  This is not a Qt binding for Ada.  Rather, it
+is a pure Ada implementation that incorporates the following concepts:
 
 * Signals and Slots
 * Properties
@@ -33,10 +33,14 @@ Comments and patches are welcome.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
-## Credits
+## Authors
 
-Author: Glen Cornell
+* **Glen Cornell** - Initial contribution
 
 ## License
 
 Please refer to the [MIT license](LICENSE)
+
+## TODO
+
+* Add tasking support
