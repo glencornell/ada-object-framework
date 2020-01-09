@@ -39,7 +39,7 @@ package Aof.Core.Objects is
    function Get_Parent (This : in Object'Class) return Object_Ptr;
    procedure Set_Parent -- raises Circular_Reference_Exception
      (This : in out Object'Class;
-      Parent : in out not null Object_Ptr);
+      Parent : in not null Object_Ptr);
    
    --  Accessors to the object's children.
    function Get_Children (This : in Object'Class) return Object_List.List;
@@ -68,7 +68,7 @@ package Aof.Core.Objects is
    generic
       with procedure Proc(This : in out Object_Ptr);
    procedure Iterate
-     (This : in out Object_Ptr;
+     (This : in Object_Ptr;
       Options : in Find_Child_Options := Find_Children_Recursively);
    
    function Contains

@@ -12,7 +12,20 @@ extend the Ada language in the following ways:
 
 TODO: describe the goals of the project, use-cases, and software architecture.
 
+## Examples
+
+Please explore the examples for how to use this library. Summary of examples:
+
+|Directory|Description|
+|---|---|
+|[signals](examples/signals)|Simple usage of signals and slots|
+|[chained_signals](examples/chained_signals)|Signals that invoke other signals for delegation|
+|[properties](examples/properties)|Simple use of properties|
+|[object_hierarchy](examples/object_hierarchy)|Demonstration of built-in object hierarchies|
+
 ## Contributing
+
+Comments and patches are welcome.
 
 1. Fork it: `git clone https://github.com/glencornell/ada-object-framework`
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -26,4 +39,4 @@ Author: Glen Cornell
 
 ## License
 
-Please refer to the MIT [license](LICENSE)
+Please refer to the [MIT license](LICENSE)

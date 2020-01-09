@@ -12,8 +12,6 @@ with My_Objects;
 
 procedure Object_Hierarchy_Test is
    
-   use type Ada.Strings.Unbounded.Unbounded_String;
-   
    procedure Dump_Object (This : in out Aof.Core.Objects.Object_Ptr) is 
    begin
       Ada.Text_Io.Put_Line("Object: " & This.Get_Name);

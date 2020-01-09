@@ -1,5 +1,3 @@
-with Ada.Strings.Unbounded;
-
 package body Aof.Core.Objects is
    
    use type Object_List.Cursor;
@@ -24,9 +22,8 @@ package body Aof.Core.Objects is
    
    procedure Set_Parent
      (This : in out Object'Class;
-      Parent : in out not null Object_Ptr) is
+      Parent : in not null Object_Ptr) is
       This_Ptr : Object_Ptr := This'Unchecked_Access;
-      Parent_Of_Parent : Object_Ptr := null;
    begin
       -- If the parent is found in this objects list of children(recursively), then fail
       if This.Contains(Parent) or This_Ptr = Parent then
@@ -108,7 +105,7 @@ package body Aof.Core.Objects is
    end;
    
    procedure Iterate
-     (This : in out Object_Ptr;
+     (This : in Object_Ptr;
       Options : in Find_Child_Options := Find_Children_Recursively) is
    begin
       for Child of This.Children loop

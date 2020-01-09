@@ -11,7 +11,6 @@ procedure Chained_Signal_Test is
    package S1_Pkg is new Aof.Core.Signals.S1(Param_1 => Integer);
 
    S0 : Aof.Core.Signals.S0.Signal;
-   S1 : S1_Pkg.Signal;
 begin
    --  Connecting the slots to the signal as in the first example:
    S0.Connect(Slots.Xaa'access);

@@ -1,4 +1,3 @@
-with Aof.Core.Signals;
 with Aof.Core.Generic_Properties;
 with Ada.Strings.Unbounded;
 
