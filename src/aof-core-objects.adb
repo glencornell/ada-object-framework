@@ -15,15 +15,15 @@ package body Aof.Core.Objects is
       This.Name.Set(Ada.Strings.Unbounded.To_Unbounded_String(Name));
    end;
    
-   function Get_Parent (This : in Object'Class) return Object_Ptr is
+   function Get_Parent (This : in Object'Class) return Access_Object is
    begin
       return This.Parent;
    end;
    
    procedure Set_Parent
-     (This : in out Object'Class;
-      Parent : in not null Object_Ptr) is
-      This_Ptr : Object_Ptr := This'Unchecked_Access;
+     (This     : in out Object'Class;
+      Parent   : in not null Access_Object) is
+      This_Ptr : Access_Object := This'Unchecked_Access;
    begin
       -- If the parent is found in this objects list of children(recursively), then fail
       if This.Contains(Parent) or This_Ptr = Parent then
@@ -41,15 +41,16 @@ package body Aof.Core.Objects is
       This.Parent := Parent;
    end;
    
-   function Get_Children (This : in Object'Class) return Object_List.List is
+   function Get_Children 
+     (This : in Object'Class) return Object_List.List is
    begin
       return This.Children;
    end;
    
    function Find_Child 
-     (This : in Object'Class;
-      Name : in Ada.Strings.Unbounded.Unbounded_String;
-      Options : in Find_Child_Options := Find_Children_Recursively) return Object_Ptr is 
+     (This    : in Object'Class;
+      Name    : in Ada.Strings.Unbounded.Unbounded_String;
+      Options : in Find_Child_Options := Find_Children_Recursively) return Access_Object is 
    begin
       for Obj of This.Children loop
 	 if Name = Obj.Name.Get then
@@ -63,9 +64,10 @@ package body Aof.Core.Objects is
    end;
    
    function Find_Child 
-     (This : in Object'Class;
-      Name : in String;
-      Options : in Find_Child_Options := Find_Children_Recursively) return Object_Ptr is 
+     (This    : in Object'Class;
+      Name    : in String;
+      Options : in Find_Child_Options := Find_Children_Recursively) 
+     return Access_Object is 
       The_Name : constant Ada.Strings.Unbounded.Unbounded_String := 
 	Ada.Strings.Unbounded.To_Unbounded_String(Name);
    begin
@@ -73,9 +75,10 @@ package body Aof.Core.Objects is
    end;
    
    function Find_Children
-     (This : in Object'Class;
-      Name : in Ada.Strings.Unbounded.Unbounded_String;
-      Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List is 
+     (This    : in Object'Class;
+      Name    : in Ada.Strings.Unbounded.Unbounded_String;
+      Options : in Find_Child_Options := Find_Children_Recursively) 
+     return Object_List.List is 
       Obj_List : Object_List.List;
    begin
       for Obj of This.Children loop
@@ -95,9 +98,10 @@ package body Aof.Core.Objects is
    end;
    
    function Find_Children
-     (This : in Object'Class;
-      Name : in String;
-      Options : in Find_Child_Options := Find_Children_Recursively) return Object_List.List is 
+     (This    : in Object'Class;
+      Name    : in String;
+      Options : in Find_Child_Options := Find_Children_Recursively)
+     return Object_List.List is 
       The_Name : constant Ada.Strings.Unbounded.Unbounded_String := 
 	Ada.Strings.Unbounded.To_Unbounded_String(Name);
    begin
@@ -105,7 +109,7 @@ package body Aof.Core.Objects is
    end;
    
    procedure Iterate
-     (This : in Object_Ptr;
+     (This    : in Access_Object;
       Options : in Find_Child_Options := Find_Children_Recursively) is
    begin
       for Child of This.Children loop
@@ -117,10 +121,11 @@ package body Aof.Core.Objects is
    end;
    
    function Contains
-     (This : in out Object'Class;
-      Child : in not null Object_Ptr) return Boolean is 
-      This_Ptr : constant Object_Ptr := This'Unchecked_Access;
-      Obj : Object_Ptr := Child.Parent;
+     (This  : in out Object'Class;
+      Child : in not null Access_Object)
+     return Boolean is 
+      This_Ptr : constant Access_Object := This'Unchecked_Access;
+      Obj : Access_Object := Child.Parent;
    begin
       while Obj /= null loop
 	 if Obj = This_Ptr then
@@ -132,12 +137,12 @@ package body Aof.Core.Objects is
    end;
    
    procedure Delete_Child
-     (This : in out Object'Class;
-      Child : in out not null Object_Ptr;
+     (This    : in out Object'Class;
+      Child   : in out not null Access_Object;
       Options : in Find_Child_Options := Find_Children_Recursively) is 
       
       I : Object_List.Cursor := This.Children.First;
-      Obj : Object_Ptr := null;
+      Obj : Access_Object := null;
    begin
       loop
 	 Obj := Object_List.Element(I);

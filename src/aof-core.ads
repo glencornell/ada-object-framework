@@ -1,3 +1,3 @@
 package Aof.Core is 
-   -- empty root package for creating namespace
+   pragma Pure;
 end Aof.Core;

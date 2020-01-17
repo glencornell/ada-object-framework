@@ -1,6 +1,6 @@
 Library project ada_object_framework is
   Lib_Name := "aof";
-  Version := "1.0.0";
+  Version := "0.1.0";
   
   for Languages use ("Ada");
   

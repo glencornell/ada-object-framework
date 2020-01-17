@@ -18,6 +18,6 @@ project Build is
      for Default_Switches ("ada") use ("-ggdb");
   end Linker;
   
-  for Main use ("property_test");
+  for Main use ("property_example");
   
 end Build;

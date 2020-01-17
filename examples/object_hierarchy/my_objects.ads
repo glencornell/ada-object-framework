@@ -11,11 +11,11 @@ package My_Objects is
    Ok                : aliased Widgets.Widget;
    Cancel            : aliased Widgets.Widget;
    
-   Top_Ptr               : Aof.Core.Objects.Object_Ptr := Top'Access;
-   Form_Ptr              : Aof.Core.Objects.Object_Ptr := Form'Access;
-   Label_Ptr             : Aof.Core.Objects.Object_Ptr := Label'Access;
-   Row_Column_Layout_Ptr : Aof.Core.Objects.Object_Ptr := Row_Column_Layout'Access;
-   Ok_Ptr                : Aof.Core.Objects.Object_Ptr := Ok'Access;
-   Cancel_Ptr            : Aof.Core.Objects.Object_Ptr := Cancel'Access;
+   Top_Ptr               : Aof.Core.Objects.Access_Object := Top'Access;
+   Form_Ptr              : Aof.Core.Objects.Access_Object := Form'Access;
+   Label_Ptr             : Aof.Core.Objects.Access_Object := Label'Access;
+   Row_Column_Layout_Ptr : Aof.Core.Objects.Access_Object := Row_Column_Layout'Access;
+   Ok_Ptr                : Aof.Core.Objects.Access_Object := Ok'Access;
+   Cancel_Ptr            : Aof.Core.Objects.Access_Object := Cancel'Access;
    
 end My_Objects;

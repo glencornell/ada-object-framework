@@ -18,6 +18,6 @@ project Build is
      for Default_Switches ("ada") use ("-ggdb");
   end Linker;
   
-  for Main use ("object_hierarchy_test");
+  for Main use ("object_hierarchy");
   
 end Build;

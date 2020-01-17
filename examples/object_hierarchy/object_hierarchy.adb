@@ -10,9 +10,9 @@ with My_Objects;
 --  hierarchy (different than the inheritance hierarchy).  We then
 --  repaint the widgets.
 
-procedure Object_Hierarchy_Test is
+procedure Object_Hierarchy is
    
-   procedure Dump_Object (This : in out Aof.Core.Objects.Object_Ptr) is 
+   procedure Dump_Object (This : in out Aof.Core.Objects.Access_Object) is 
    begin
       Ada.Text_Io.Put_Line("Object: " & This.Get_Name);
    end;
@@ -45,4 +45,4 @@ begin
    --  Dump the widget hierarchy:
    Dump_Object_Tree(My_Objects.Top_Ptr);
    
-end;
+end Object_Hierarchy;

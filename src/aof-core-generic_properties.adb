@@ -13,7 +13,7 @@ package body Aof.Core.Generic_Properties is
    end;
    
    procedure Connect (This : in out Property'Class; 
-		      Proc : in Signals_Pkg.Procedure_Ptr) is 
+		      Proc : in Signals_Pkg.Access_Procedure) is 
    begin
       This.On_Change_Signal.Connect(Proc);
    end;

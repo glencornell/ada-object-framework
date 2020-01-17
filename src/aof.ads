@@ -1,3 +1,3 @@
 package Aof is 
-   -- empty root package for creating namespace
+   pragma Pure;
 end Aof;

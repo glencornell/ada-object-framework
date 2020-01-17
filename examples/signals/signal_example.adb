@@ -1,3 +1,5 @@
+with Aof.Core.Root_Objects;
+with Aof.Core.Generic_Signals;
 with Aof.Core.Signals;
 with Slots;
 
@@ -7,14 +9,15 @@ with Slots;
 --  signal's "Emit" method to subsequently invoke all slots connected
 --  to the signal.
 
-procedure Signal_Test is
+procedure Signal_Example is
    
    --  Create a signal class containing one argument of type integer
-   package S1_Pkg is new Aof.Core.Signals.S1(Param_1 => Integer);
+   package S1_Pkg is new Aof.Core.Generic_Signals.S1
+     (Object        => Aof.Core.Root_Objects.Root_Object,
+      Access_Object => Aof.Core.Root_Objects.Access_Object,
+      Param_1       => Integer);
    
-   --  A signal with no parameters is not a generic package and,
-   --  therefore, needs no generic instantiation.
-   S0 : Aof.Core.Signals.S0.Signal;
+   S0 : Aof.Core.Signals.Empty.Signal;
    S1 : S1_Pkg.Signal;
    
 begin
@@ -36,4 +39,4 @@ begin
       S1.Emit(I);
    end loop;
    
-end;
+end Signal_Example;
