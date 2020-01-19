@@ -12,6 +12,10 @@ package Aof.Core.Properties is
      (Object        => Aof.Core.Root_Objects.Root_Object,
       Access_Object => Aof.Core.Root_Objects.Access_Object,
       T             => Ada.Strings.Unbounded.Unbounded_String);
+   package Booleans is new Aof.Core.Generic_Properties 
+     (Object        => Aof.Core.Root_Objects.Root_Object,
+      Access_Object => Aof.Core.Root_Objects.Access_Object,
+      T             => Boolean);
    package Naturals is new Aof.Core.Generic_Properties 
      (Object        => Aof.Core.Root_Objects.Root_Object,
       Access_Object => Aof.Core.Root_Objects.Access_Object,

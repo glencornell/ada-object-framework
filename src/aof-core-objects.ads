@@ -10,11 +10,11 @@ package Aof.Core.Objects is
    
    --  Publicly accessible parts of the Object type. No objects should
    --  be made of this type.  Rather, see Object below.
-   type Public_Part is abstract new Aof.Core.Root_Objects.Root_Object with record
+   type Public_Part is abstract limited new Aof.Core.Root_Objects.Root_Object with record
       Name      : Aof.Core.Properties.Unbounded_Strings.Property;
       Destroyed : Aof.Core.Signals.Access_Objects.Signal;
    end record;
-   procedure Finalize (This : in out Public_Part);
+   overriding procedure Finalize (This : in out Public_Part);
 
    --  The object type is the root object in the Ada Object Framework.
    --  All objects should be derived from this type.
